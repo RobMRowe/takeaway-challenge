@@ -7,21 +7,14 @@ class Takeaway {
     return this.menu;
   }
 
-  add(itemName) {
+  add(itemName, quantity) {
     let itemToAdd = this.menu.find(item => item.name === itemName);
-    if (itemToAdd.quantity == null) {
-      itemToAdd.quantity = 1;
-    } else {
-      itemToAdd.quantity++;
-    }
+    itemToAdd.quantity = itemToAdd.quantity + quantity || quantity;
   }
 
-  remove(itemName) {
+  remove(itemName, quantity) {
     let itemToRemove = this.menu.find(item => item.name === itemName);
-    if (itemToRemove.quantity == null || 0) {
-      itemToRemove.quantity = 0;
-    } else {
-      itemToRemove.quantity--;
-    }
+    itemToRemove.quantity = itemToRemove.quantity == null ? 0 : itemToRemove.quantity - quantity;
+    itemToRemove.quantity = itemToRemove.quantity < 0 ? 0 : itemToRemove.quantity;
   }
 }

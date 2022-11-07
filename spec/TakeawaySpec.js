@@ -11,19 +11,17 @@ describe('Takeaway', function () {
 
   describe('when dish has been selected', function () {
     it('should be possible to increase the quantity of the dish in the order', function () {
-      takeaway.add("Haggis Toastie");
-      takeaway.add("Haggis Toastie");
+      takeaway.add("Haggis Toastie", 2);
       expect(takeaway.all()).toEqual([{ name: "Beans on Toast", price: 2.5 }, { name: "Haggis Toastie", price: 12.5, quantity: 2 }]);
-      takeaway.add("Beans on Toast");
+      takeaway.add("Beans on Toast", 1);
       expect(takeaway.all()).toEqual([{ name: "Beans on Toast", price: 2.5, quantity: 1 }, { name: "Haggis Toastie", price: 12.5, quantity: 2 }]);
     });
 
     it('should be possible to decrease the quantity of the dish in the order, with a minimum of 0', function () {
-      takeaway.add("Haggis Toastie");
-      takeaway.add("Haggis Toastie");
-      takeaway.remove("Haggis Toastie");
+      takeaway.add("Haggis Toastie", 2);
+      takeaway.remove("Haggis Toastie", 1);
       expect(takeaway.all()).toEqual([{ name: "Beans on Toast", price: 2.5 }, { name: "Haggis Toastie", price: 12.5, quantity: 1 }]);
-      takeaway.remove("Beans on Toast");
+      takeaway.remove("Beans on Toast", 2);
       expect(takeaway.all()).toEqual([{ name: "Beans on Toast", price: 2.5, quantity: 0 }, { name: "Haggis Toastie", price: 12.5, quantity: 1 }]);
     });
   });
